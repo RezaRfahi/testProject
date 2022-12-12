@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\User;
-use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Http\Requests\StoreResturantRequest;
+use App\Http\Requests\UpdateResturantRequest;
+use App\Models\Resturant;
 
-class UserController extends Controller
+class ResturantController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -32,10 +31,10 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreResturantRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreResturantRequest $request)
     {
         //
     }
@@ -43,10 +42,10 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Resturant  $resturant
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(Resturant $resturant)
     {
         //
     }
@@ -54,10 +53,10 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Resturant  $resturant
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(Resturant $resturant)
     {
         //
     }
@@ -65,11 +64,11 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $user
+     * @param  \App\Http\Requests\UpdateResturantRequest  $request
+     * @param  \App\Models\Resturant  $resturant
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(UpdateResturantRequest $request, Resturant $resturant)
     {
         //
     }
@@ -77,10 +76,10 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Resturant  $resturant
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(Resturant $resturant)
     {
         //
     }
