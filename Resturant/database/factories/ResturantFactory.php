@@ -17,7 +17,11 @@ class ResturantFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => fake()->colorName(),
+            'address' => fake()->streetName(),
+            'manager_name' => fake()->name(),
+            'tel' => fake()->numerify('###-#########'),
+            'vote' => rand(0,150)
         ];
     }
 }
