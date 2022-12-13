@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enum\ReservationStatusEnum as Status;
 use App\Models\Resturant;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -19,16 +20,25 @@ class ReservationFactory extends Factory
     public function definition()
     {
         $user=User::all()->random();
+
         $resturant=Resturant::all()->random();
-        $dateTime=fake()->dateTime('2 weeks');
+
+        $starts_at = Carbon::createFromTimestamp(fake()
+            ->dateTimeBetween($startDate = '+2 days', $endDate = '+1 week')->getTimeStamp()) ;
+
+        $ends_at= Carbon::createFromFormat('Y-m-d H:i:s', $starts_at)->
+        addHours( fake()->numberBetween( 1, 4 ) );
+
         return [
             'user_id' => $user->id,
             'resturant_id' => $resturant->id,
             'user_name' => $user->name,
             'resturant_name' => $resturant->name,
             'reservation_code' => fake()->numerify('#######'),
-            'reservation_start_time' => $dateTime,
-            'reservation_start_time' => $dateTime
+            'table_number' => rand(0,80),
+            'reservation_start_time' => $starts_at,
+            'reservation_start_time' => $ends_at,
+            'status' => fake()->randomElement(['expect', 'finished', 'on_time'])
         ];
     }
 }

@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string('user_name')->fulltext();
             $table->string('resturant_name')->fulltext();
             $table->string('reservation_code')->unique();
-            $table->unsignedInteger('person_count');
             $table->unsignedInteger('table_number')->index();
             $table->dateTime('reservation_start_time')->unique();
             $table->dateTime('reservation_finish_time')->unique();

@@ -21,6 +21,8 @@ class ResturantFactory extends Factory
             'address' => fake()->streetName(),
             'manager_name' => fake()->name(),
             'tel' => fake()->numerify('###-#########'),
+            'table_count' => rand(20,100),
+            'unoccupied_table' => rand(0,80),
             'vote' => rand(0,150)
         ];
     }
