@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Enum\ReservationStatusEnum as Status;
+use App\Models\Reservation;
 use App\Models\Resturant;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -17,6 +18,9 @@ class ReservationFactory extends Factory
      *
      * @return array<string, mixed>
      */
+
+    protected $model= Reservation::class;
+
     public function definition()
     {
         $user=User::all()->random();
