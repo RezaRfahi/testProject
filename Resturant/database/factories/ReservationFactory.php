@@ -6,6 +6,7 @@ use App\Enum\ReservationStatusEnum as Status;
 use App\Models\Reservation;
 use App\Models\Resturant;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -41,7 +42,7 @@ class ReservationFactory extends Factory
             'reservation_code' => fake()->numerify('#######'),
             'table_number' => rand(0,80),
             'reservation_start_time' => $starts_at,
-            'reservation_start_time' => $ends_at,
+            'reservation_finish_time' => $ends_at,
             'status' => fake()->randomElement(['expect', 'finished', 'on_time'])
         ];
     }
