@@ -27,6 +27,7 @@ return new class extends Migration
             $table->dateTime('reservation_finish_time')->unique();
             $table->dateTime('real_finish')->nullable();
             $table->string('status')->default('expect');
+            $table->primary(['user_id', 'resturant_id', 'reservation_start_time']);
             $table->timestamps();
         });
     }
