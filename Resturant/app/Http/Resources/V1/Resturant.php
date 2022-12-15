@@ -17,7 +17,6 @@ class Resturant extends JsonResource
     {
         return
         [
-            'data' => [
                 'id' => $this->id,
                 'name' => $this->name,
                 'address' => $this->address,
@@ -26,9 +25,12 @@ class Resturant extends JsonResource
                 'capacity' => $this->capacity,
                 'free_capacity' => $this->free_capacity,
                 'vote' => $this->vote
-                ],
-            'status' => JsonResponse::HTTP_OK
         ];
 //            parent::toArray($request);
+    }
+
+    public function with($request)
+    {
+        return ['status' => JsonResponse::HTTP_OK];
     }
 }

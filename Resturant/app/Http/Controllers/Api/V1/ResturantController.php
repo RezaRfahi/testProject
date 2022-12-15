@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreResturantRequest;
 use App\Http\Requests\UpdateResturantRequest;
+use App\Http\Resources\V1\ResturantCollection;
 use App\Models\Resturant;
 use \App\Http\Resources\V1\Resturant as ResturantResource;
+use Illuminate\Http\JsonResponse;
 
 class ResturantController extends Controller
 {
@@ -17,7 +19,7 @@ class ResturantController extends Controller
      */
     public function index()
     {
-        return  ResturantResource::collection(Resturant::all());
+        return  (new ResturantCollection(Resturant::all()))->response();
     }
 
     /**
@@ -38,7 +40,15 @@ class ResturantController extends Controller
      */
     public function store(StoreResturantRequest $request)
     {
-        //
+//         $resturant= new Resturant([
+//            'name' => $request->name,
+//            'address' => $request->address,
+//            'manager_name' => $request->manager_name,
+//            'tel' => $request->tel,
+//            'capacity' => $request->capacity,
+//            'free_capacity' => $request->free_capacity
+//        ]);
+        return $request->all() ;
     }
 
     /**
