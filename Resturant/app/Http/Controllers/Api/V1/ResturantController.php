@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreResturantRequest;
 use App\Http\Requests\UpdateResturantRequest;
 use App\Models\Resturant;
+use \App\Http\Resources\V1\Resturant as ResturantResource;
 
 class ResturantController extends Controller
 {
@@ -15,7 +17,7 @@ class ResturantController extends Controller
      */
     public function index()
     {
-        //
+        return  ResturantResource::collection(Resturant::all());
     }
 
     /**
@@ -47,7 +49,7 @@ class ResturantController extends Controller
      */
     public function show(Resturant $resturant)
     {
-        //
+        return new ResturantResource($resturant);
     }
 
     /**
