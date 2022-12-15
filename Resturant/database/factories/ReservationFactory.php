@@ -40,6 +40,7 @@ class ReservationFactory extends Factory
             'user_name' => $user->name,
             'resturant_name' => $resturant->name,
             'reservation_code' => fake()->numerify('#######'),
+            'person_count' => rand(1,16),
             'table_number' => rand(0,80),
             'reservation_start_time' => $starts_at,
             'reservation_finish_time' => $ends_at,

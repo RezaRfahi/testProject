@@ -16,15 +16,15 @@ class ResturantFactory extends Factory
      */
     public function definition()
     {
-        $table_count = rand(20,80);
+        $capacity = rand(20,80);
 
         return [
             'name' => fake()->colorName(),
             'address' => fake()->streetName(),
             'manager_name' => fake()->name(),
-            'tel' => fake()->numerify('###-#########'),
-            'table_count' => $table_count,
-            'unoccupied_table' => rand(0,$table_count),
+            'tel' => fake()->numerify('021-#########'),
+            'capacity' => $capacity,
+            'free_capacity' => rand(0,$capacity),
             'vote' => rand(0,150)
         ];
     }

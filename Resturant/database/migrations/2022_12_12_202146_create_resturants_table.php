@@ -19,8 +19,8 @@ return new class extends Migration
             $table->text('address');
             $table->string('manager_name')->fulltext();
             $table->string('tel');
-            $table->unsignedInteger('table_count');
-            $table->unsignedInteger('unoccupied_table');
+            $table->unsignedInteger('capacity');
+            $table->unsignedInteger('free_capacity');
             $table->unsignedBigInteger('vote')->default(0);
             $table->timestamps();
         });

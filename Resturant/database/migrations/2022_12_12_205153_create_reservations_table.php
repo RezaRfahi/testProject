@@ -22,10 +22,11 @@ return new class extends Migration
             $table->string('user_name')->fulltext();
             $table->string('resturant_name')->fulltext();
             $table->string('reservation_code')->unique();
+            $table->unsignedInteger('person_count');
             $table->unsignedInteger('table_number')->index();
-            $table->dateTime('reservation_start_time')->unique();
-            $table->dateTime('reservation_finish_time')->unique();
-            $table->dateTime('real_finish')->nullable();
+            $table->timestamp('reservation_start_time')->unique();
+            $table->timestamp('reservation_finish_time')->unique();
+            $table->timestamp('real_finish')->nullable();
             $table->string('status')->default('expect');
             $table->primary(['user_id', 'resturant_id', 'reservation_start_time']);
             $table->timestamps();
