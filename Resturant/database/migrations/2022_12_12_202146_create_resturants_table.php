@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name')->fulltext();
             $table->text('address');
             $table->string('manager_name')->fulltext();
-            $table->string('tel');
+            $table->string('tel')->unique();
             $table->unsignedInteger('capacity');
             $table->unsignedInteger('free_capacity');
             $table->unsignedBigInteger('vote')->default(0);

@@ -22,6 +22,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('resturant')->group(function (){
         Route::get('/index', [ResturantController::class, 'index']);
         Route::get('/show/{resturant}', [ResturantController::class, 'show']);
-        Route::post('/create', [ResturantController::class, 'store']);
+        Route::post('/store', [ResturantController::class, 'store']);
     }
 );

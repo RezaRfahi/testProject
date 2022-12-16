@@ -40,15 +40,15 @@ class ResturantController extends Controller
      */
     public function store(StoreResturantRequest $request)
     {
-//         $resturant= new Resturant([
-//            'name' => $request->name,
-//            'address' => $request->address,
-//            'manager_name' => $request->manager_name,
-//            'tel' => $request->tel,
-//            'capacity' => $request->capacity,
-//            'free_capacity' => $request->free_capacity
-//        ]);
-        return $request->all() ;
+
+        Resturant::create($request->all());
+        return
+            response([
+            'data' => [
+                'message' => 'your data inserted successfully!'
+            ],'status' => JsonResponse::HTTP_OK
+        ])
+;
     }
 
     /**

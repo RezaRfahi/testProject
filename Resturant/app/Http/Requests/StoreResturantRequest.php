@@ -27,7 +27,7 @@ class StoreResturantRequest extends FormRequest
             'name' => 'required|min:3|max:25',
             'address' => 'required|max:255',
             'manager_name' => 'required|max:25',
-            'tel' => 'required|numeric|digits:8',
+            'tel' => 'required|unique:resturants|numeric|digits:8',
             'capacity' => 'required|integer|between:50,350',
             'free_capacity' => 'required|integer|between:0,350',
         ];
