@@ -11,6 +11,6 @@ class Resturant extends Model
 
     protected $fillable =
         [
-            'name', 'address', 'manager_name', 'tel', 'capacity', 'free_capacity'
+            'name', 'address', 'manager_name', 'tel', 'capacity', 'free_capacity', 'vote'
         ];
 }

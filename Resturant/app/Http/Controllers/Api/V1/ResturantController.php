@@ -82,7 +82,13 @@ class ResturantController extends Controller
      */
     public function update(UpdateResturantRequest $request, Resturant $resturant)
     {
-        //
+        $resturant->update($request->all());
+        return
+            response([
+                'data' => [
+                    'message' => 'the resturant has been updated!'
+                ],'status' => JsonResponse::HTTP_OK
+            ]);
     }
 
     /**

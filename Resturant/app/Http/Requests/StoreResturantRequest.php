@@ -24,7 +24,7 @@ class StoreResturantRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:3|max:25',
+            'name' => 'required|min:2|max:25',
             'address' => 'required|max:255',
             'manager_name' => 'required|max:25',
             'tel' => 'required|unique:resturants|numeric|digits:8',

@@ -25,5 +25,6 @@ Route::prefix('resturant')->group(function (){
         Route::post('/store', [ResturantController::class, 'store']);
         Route::delete('/delete/{resturant}', [ResturantController::class, 'destroy']);
         Route::get('/edit/{resturant}', [ResturantController::class, 'edit']);
-    }
+        Route::patch('/update/{resturant}', [ResturantController::class, 'update']);
+}
 );
