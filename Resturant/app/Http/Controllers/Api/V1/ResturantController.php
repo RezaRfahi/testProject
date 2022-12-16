@@ -70,7 +70,7 @@ class ResturantController extends Controller
      */
     public function edit(Resturant $resturant)
     {
-        //
+        return new ResturantResource($resturant);
     }
 
     /**
