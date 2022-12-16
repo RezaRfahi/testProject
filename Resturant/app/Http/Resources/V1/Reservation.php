@@ -3,6 +3,8 @@
 namespace App\Http\Resources\V1;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Morilog\Jalali\CalendarUtils;
+use Morilog\Jalali\Jalalian;
 
 class Reservation extends JsonResource
 {
@@ -19,8 +21,8 @@ class Reservation extends JsonResource
             'resturant_name' => $this->resturant_name,
             'person_count' => $this->person_count,
             'table_number' => $this->table_number,
-            'reservation_start_time' => $this->reservation_start_time,
-            'reservation_finish_time' => $this->reservation_finish_time
+            'reservation_start_time' => CalendarUtils::strftime('Y/m/d H:i:s', $this->reservation_start_time),
+            'reservation_finish_time' => CalendarUtils::strftime('Y/m/d H:i:s', $this->reservation_finish_time)
         ];
     }
 }

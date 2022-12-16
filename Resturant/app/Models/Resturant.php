@@ -13,4 +13,10 @@ class Resturant extends Model
         [
             'name', 'address', 'manager_name', 'tel', 'capacity', 'free_capacity', 'vote'
         ];
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
 }

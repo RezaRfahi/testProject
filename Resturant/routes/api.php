@@ -31,4 +31,5 @@ Route::prefix('resturant')->group(function (){
 
 Route::prefix('reservation')->group(function (){
     Route::get('/reserved', [ReservationController::class, 'userShow']);
+    Route::put('/store', [ReservationController::class, 'store']);
 });
