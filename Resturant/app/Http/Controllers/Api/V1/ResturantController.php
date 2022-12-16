@@ -93,6 +93,12 @@ class ResturantController extends Controller
      */
     public function destroy(Resturant $resturant)
     {
-        //
+        $resturant->delete();
+        return
+        response([
+            'data' => [
+                'message' => 'the resturant has been deleted!'
+            ],'status' => JsonResponse::HTTP_OK
+        ]);
     }
 }
