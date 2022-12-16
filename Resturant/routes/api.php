@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\V1\ReservationController as ReservationController;
 use App\Http\Controllers\Api\V1\ResturantController as ResturantController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -22,9 +23,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('resturant')->group(function (){
         Route::get('/index', [ResturantController::class, 'index']);
         Route::get('/show/{resturant}', [ResturantController::class, 'show']);
-        Route::post('/store', [ResturantController::class, 'store']);
+        Route::put('/store', [ResturantController::class, 'store']);
         Route::delete('/delete/{resturant}', [ResturantController::class, 'destroy']);
         Route::get('/edit/{resturant}', [ResturantController::class, 'edit']);
         Route::patch('/update/{resturant}', [ResturantController::class, 'update']);
-}
-);
+});
+
+Route::prefix('reservation')->group(function (){
+    Route::get('/reserved', [ReservationController::class, 'userShow']);
+});

@@ -59,7 +59,7 @@ class ResturantController extends Controller
      */
     public function show(Resturant $resturant)
     {
-        return new ResturantResource($resturant);
+        return (new ResturantResource($resturant))->response();
     }
 
     /**
@@ -70,7 +70,7 @@ class ResturantController extends Controller
      */
     public function edit(Resturant $resturant)
     {
-        return new ResturantResource($resturant);
+        return (new ResturantResource($resturant))->response();
     }
 
     /**
