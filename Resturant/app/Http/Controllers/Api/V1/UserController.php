@@ -9,10 +9,22 @@ use App\Http\Requests\UserStoreRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash as Hash;
+use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class UserController extends Controller
 {
+    public function register(UserStoreRequest $request)
+    {
+        $request->merge(['level' => 'user', 'remember_token' => Str::random(10)]);
+        User::create($request->all());
+        return  response([
+            'data' => [
+                'message' => 'your account has been registered successfully!'
+            ],'status' => JsonResponse::HTTP_OK
+        ]);
+    }
+
     public function login(UserLoginRequest $request)
     {
         if (!auth()->attempt($request->all()))
@@ -60,10 +72,12 @@ class UserController extends Controller
      */
     public function store(UserStoreRequest $request)
     {
+        $request->merge( ['remember_token' => Str::random(10)]);
         User::create($request->all());
         return  response([
             'data' => [
-                'message' => 'the user has been created!'
+                'message' => 'the user has been created!',
+                'remember_token' => $request->remember_token
             ],'status' => JsonResponse::HTTP_OK
         ]);
     }
