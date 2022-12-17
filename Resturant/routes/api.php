@@ -36,5 +36,6 @@ Route::prefix('reservation')->group(function (){
 });
 
 Route::prefix('user')->group(function () {
-    Route::put('store', [UserController::class, 'store']);
+    Route::put('/store', [UserController::class, 'store']);
+    Route::post('/login', [UserController::class, 'login']);
 });

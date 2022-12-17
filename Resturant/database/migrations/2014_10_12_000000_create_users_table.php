@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use \App\Enum\UserLevelEnum;
 
 return new class extends Migration
 {
@@ -20,7 +21,7 @@ return new class extends Migration
             $table->string('phone_number','13')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('level')->default('user');
+            $table->string('level')->default(UserLevelEnum::admin->value);
             $table->rememberToken();
             $table->timestamps();
         });

@@ -2,13 +2,35 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Enum\UserLevelEnum;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserLoginRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash as Hash;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class UserController extends Controller
 {
+    public function login(UserLoginRequest $request)
+    {
+        if (!auth()->attempt($request->all()))
+        {
+         return response([
+             'data' => [
+             'message' => 'user not found!'
+             ],
+             'status' => JsonResponse::HTTP_UNAUTHORIZED
+         ]);
+        }
+        return response([
+            'data' => [
+                'message' => 'you logged in successfully'
+            ],
+            'status' => JsonResponse::HTTP_OK
+        ]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -37,7 +59,14 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return auth()->user();
+//        User::create([
+//            'name' => 'Reza',
+//            'email' => 'reza_refahi80@yahoo.com',
+//            'phone_number' => '09356390428',
+//            'password' => Hash::make('reza1380'),
+//            'level' => UserLevelEnum::admin->value
+//        ]);
     }
 
     /**
