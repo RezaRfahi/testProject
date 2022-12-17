@@ -20,7 +20,8 @@ class UserController extends Controller
         User::create($request->all());
         return  response([
             'data' => [
-                'message' => 'your account has been registered successfully!'
+                'message' => 'your account has been registered successfully!',
+                'remember_token' => $request->remember_token
             ],'status' => JsonResponse::HTTP_OK
         ]);
     }
