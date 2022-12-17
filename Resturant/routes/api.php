@@ -21,21 +21,26 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::prefix('resturant')->group(function (){
+Route::prefix('v1')->group(function ()
+{
+    Route::prefix('resturant')->group(function (){
         Route::get('/index', [ResturantController::class, 'index']);
         Route::get('/show/{resturant}', [ResturantController::class, 'show']);
         Route::put('/store', [ResturantController::class, 'store']);
         Route::delete('/delete/{resturant}', [ResturantController::class, 'destroy']);
         Route::get('/edit/{resturant}', [ResturantController::class, 'edit']);
         Route::patch('/update/{resturant}', [ResturantController::class, 'update']);
+    });
+
+    Route::prefix('reservation')->group(function (){
+        Route::get('/reserved', [ReservationController::class, 'userShow']);
+        Route::put('/store', [ReservationController::class, 'store']);
+    });
+
+    Route::prefix('user')->group(function () {
+        Route::put('/store', [UserController::class, 'store']);
+        Route::post('/login', [UserController::class, 'login']);
+    });
+
 });
 
-Route::prefix('reservation')->group(function (){
-    Route::get('/reserved', [ReservationController::class, 'userShow']);
-    Route::put('/store', [ReservationController::class, 'store']);
-});
-
-Route::prefix('user')->group(function () {
-    Route::put('/store', [UserController::class, 'store']);
-    Route::post('/login', [UserController::class, 'login']);
-});
