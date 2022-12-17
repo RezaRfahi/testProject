@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Enum\UserLevelEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserLoginRequest;
+use App\Http\Requests\UserStoreRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash as Hash;
@@ -57,16 +58,14 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserStoreRequest $request)
     {
-        return auth()->user();
-//        User::create([
-//            'name' => 'Reza',
-//            'email' => 'reza_refahi80@yahoo.com',
-//            'phone_number' => '09356390428',
-//            'password' => Hash::make('reza1380'),
-//            'level' => UserLevelEnum::admin->value
-//        ]);
+        User::create($request->all());
+        return  response([
+            'data' => [
+                'message' => 'the user has been created!'
+            ],'status' => JsonResponse::HTTP_OK
+        ]);
     }
 
     /**
