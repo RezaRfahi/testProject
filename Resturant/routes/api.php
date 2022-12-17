@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\V1\ReservationController as ReservationController;
 use App\Http\Controllers\Api\V1\ResturantController as ResturantController;
+use App\Http\Controllers\Api\V1\UserController as UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -32,4 +33,8 @@ Route::prefix('resturant')->group(function (){
 Route::prefix('reservation')->group(function (){
     Route::get('/reserved', [ReservationController::class, 'userShow']);
     Route::put('/store', [ReservationController::class, 'store']);
+});
+
+Route::prefix('user')->group(function () {
+    Route::put('store', [UserController::class, 'store']);
 });
