@@ -8,6 +8,7 @@ use App\Http\Requests\UserLoginRequest;
 use App\Http\Requests\UserStoreRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash as Hash;
 use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -16,12 +17,13 @@ class UserController extends Controller
 {
     public function register(UserStoreRequest $request)
     {
-        $request->merge(['level' => 'user', 'remember_token' => Str::random(10)]);
+        $request->merge(['level' => 'user', 'remember_token' => Str::random(10),
+            'api_token' => Str::random(80), 'password' => Hash::make($request->password)]);
         User::create($request->all());
         return  response([
             'data' => [
                 'message' => 'your account has been registered successfully!',
-                'remember_token' => $request->remember_token
+                'api_token' => $request->api_token
             ],'status' => JsonResponse::HTTP_OK
         ]);
     }
@@ -37,12 +39,19 @@ class UserController extends Controller
              'status' => JsonResponse::HTTP_UNAUTHORIZED
          ]);
         }
-        return response([
-            'data' => [
-                'message' => 'you logged in successfully'
-            ],
-            'status' => JsonResponse::HTTP_OK
+
+        auth()->user()->update([
+            'api_token' => Str::random(80)
         ]);
+
+        return \auth()->user();
+//        return response([
+//            'data' => [
+//                'message' => 'you logged in successfully',
+//                'api_token' => \auth()->user()->api_token
+//            ],
+//            'status' => JsonResponse::HTTP_OK
+//        ]);
     }
 
     /**
@@ -73,12 +82,14 @@ class UserController extends Controller
      */
     public function store(UserStoreRequest $request)
     {
-        $request->merge( ['remember_token' => Str::random(10)]);
-        User::create($request->all());
+        $request->merge( ['remember_token' => Str::random(10), 'api_token' => Str::random(80),
+            'password' => Hash::make($request->password)
+            ]);
+        $user=User::create($request->all());
         return  response([
             'data' => [
                 'message' => 'the user has been created!',
-                'remember_token' => $request->remember_token
+                'api_token' => $request->api_token
             ],'status' => JsonResponse::HTTP_OK
         ]);
     }
@@ -91,7 +102,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+
     }
 
     /**
@@ -127,4 +138,13 @@ class UserController extends Controller
     {
         //
     }
+
+    public function logout() {
+        auth()->logout();
+        return response()->json([
+            'data' => ['message' => 'User successfully signed out'],
+            'status' => JsonResponse::HTTP_OK,
+        ]);
+    }
+
 }

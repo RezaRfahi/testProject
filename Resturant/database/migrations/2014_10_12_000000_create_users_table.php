@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('phone_number','13')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('api_token')->unique();
             $table->string('level')->default(UserLevelEnum::user->value);
             $table->rememberToken();
             $table->timestamps();
