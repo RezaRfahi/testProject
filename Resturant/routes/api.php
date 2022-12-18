@@ -17,31 +17,36 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:api')->group(function (){
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
+    Route::prefix('v1')->group(function ()
+    {
+        Route::prefix('resturant')->controller(ResturantController::class)->group(function (){
+            Route::get('/index', 'index');
+            Route::get('/show/{resturant}', 'show');
+            Route::put('/store', 'store');
+            Route::delete('/delete/{resturant}', 'destroy');
+            Route::get('/edit/{resturant}', 'edit');
+            Route::patch('/update/{resturant}', 'update');
+        });
+
+        Route::prefix('reservation')->controller(ReservationController::class)->group(function (){
+            Route::get('/reserved', 'userShow');
+            Route::put('/store', 'store');
+        });
+
+        Route::prefix('user')->controller(UserController::class)->group(function () {
+            Route::put('/store', 'store');
+            Route::post('/login', 'login');
+            Route::get('/logout', 'logout');
+        });
+
+    });
+
 });
 
-Route::prefix('v1')->group(function ()
-{
-    Route::prefix('resturant')->controller(ResturantController::class)->group(function (){
-        Route::get('/index', 'index');
-        Route::get('/show/{resturant}', 'show');
-        Route::put('/store', 'store');
-        Route::delete('/delete/{resturant}', 'destroy');
-        Route::get('/edit/{resturant}', 'edit');
-        Route::patch('/update/{resturant}', 'update');
-    });
+Route::put('/register', [UserController::class, 'register']);
 
-    Route::prefix('reservation')->controller(ReservationController::class)->group(function (){
-        Route::get('/reserved', 'userShow');
-        Route::put('/store', 'store');
-    });
-
-    Route::prefix('user')->controller(UserController::class)->group(function () {
-        Route::put('/store', 'store');
-        Route::post('/login', 'login');
-        Route::put('/register', 'register');
-    });
-
-});
 

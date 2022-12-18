@@ -44,14 +44,13 @@ class UserController extends Controller
             'api_token' => Str::random(80)
         ]);
 
-        return \auth()->user();
-//        return response([
-//            'data' => [
-//                'message' => 'you logged in successfully',
-//                'api_token' => \auth()->user()->api_token
-//            ],
-//            'status' => JsonResponse::HTTP_OK
-//        ]);
+        return response([
+            'data' => [
+                'message' => 'you logged in successfully',
+                'api_token' => \auth()->user()->api_token
+            ],
+            'status' => JsonResponse::HTTP_OK
+        ]);
     }
 
     /**
